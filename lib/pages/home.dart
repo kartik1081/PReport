@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:preport/pages/bimAdd.dart';
+import 'package:preport/pages/takaAdd.dart';
 import 'package:preport/services/basic.dart';
 import 'package:preport/services/fire.dart';
 
@@ -13,19 +16,29 @@ class Home extends StatelessWidget {
   CurrentCandidate currentCandidate;
 
   final BasicService _service = BasicService();
+  final Fire fire = Fire();
+  final _isDialOpen = ValueNotifier(false);
 
   @override
   Widget build(BuildContext context) {
-    final Fire fire = Fire();
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.redAccent,
-        title: Text(currentCompany.name),
-        actions: [switchAccount(context)],
-      ),
-      body: Center(
-        child: Text(currentCandidate.name),
+    return WillPopScope(
+      onWillPop: () async {
+        if (_isDialOpen.value) {
+          _isDialOpen.value = false;
+        }
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.redAccent,
+          title: Text(currentCompany.name),
+          actions: [switchAccount(context)],
+        ),
+        body: Center(
+          child: Text(currentCandidate.name),
+        ),
+        floatingActionButton: floatingButtons(context),
       ),
     );
   }
@@ -40,6 +53,44 @@ class Home extends StatelessWidget {
             "Switch Account",
             style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w500),
           )
+        ],
+      ),
+    );
+  }
+
+  Widget floatingButtons(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(
+        bottom: 20.0,
+        right: 20.0,
+      ),
+      child: SpeedDial(
+        icon: Icons.add,
+        // animatedIcon: AnimatedIcons.close_menu,
+        backgroundColor: Colors.redAccent,
+        overlayColor: Colors.black,
+        overlayOpacity: 0.6,
+        spaceBetweenChildren: 5.0,
+        openCloseDial: _isDialOpen,
+        children: [
+          SpeedDialChild(
+            label: "Taka Production",
+            labelStyle: const TextStyle(fontSize: 15.0),
+            child: const Icon(Icons.production_quantity_limits),
+            onTap: () => _service.navigat(
+              context,
+              const TakaAdd(),
+            ),
+          ),
+          SpeedDialChild(
+            label: "Bims",
+            labelStyle: const TextStyle(fontSize: 15.0),
+            child: const Icon(Icons.production_quantity_limits),
+            onTap: () => _service.navigat(
+              context,
+              const BimAdd(),
+            ),
+          ),
         ],
       ),
     );

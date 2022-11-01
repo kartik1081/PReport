@@ -822,11 +822,28 @@ class AddFounder extends StatelessWidget {
                         (value) => value
                             ? _confirmPasswordFocus.requestFocus()
                             : _passwordFocus),
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.lock),
-                  label: Text("Enter Password"),
-                  labelStyle: TextStyle(fontSize: 13.0),
-                  constraints: BoxConstraints(maxHeight: 55.0),
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.lock),
+                  hintText: "Enter Password",
+                  hintStyle:
+                      const TextStyle(color: Colors.grey, fontSize: 14.0),
+                  fillColor: Colors.white,
+                  filled: true,
+                  constraints: const BoxConstraints(
+                    maxHeight: 40.0,
+                  ),
+                  contentPadding:
+                      const EdgeInsets.fromLTRB(13.0, 0.0, 0.0, 10.0),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        width: 0.0000000001, color: Colors.black),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        width: 0.0000000001, color: Colors.grey),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
                 ),
               ),
               TextFormField(
@@ -841,11 +858,28 @@ class AddFounder extends StatelessWidget {
                       ? mapDetail(data, "password", confirmPassword)
                       : null,
                 ),
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.lock),
-                  label: Text("Re-Enter Password"),
-                  labelStyle: TextStyle(fontSize: 13.0),
-                  constraints: BoxConstraints(maxHeight: 55.0),
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.lock),
+                  hintText: "Re-Enter Password",
+                  hintStyle:
+                      const TextStyle(color: Colors.grey, fontSize: 14.0),
+                  fillColor: Colors.white,
+                  filled: true,
+                  constraints: const BoxConstraints(
+                    maxHeight: 40.0,
+                  ),
+                  contentPadding:
+                      const EdgeInsets.fromLTRB(13.0, 0.0, 0.0, 10.0),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        width: 0.0000000001, color: Colors.black),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        width: 0.0000000001, color: Colors.grey),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
                 ),
               )
             ],
