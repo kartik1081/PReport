@@ -1,8 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// ignore_for_file: file_names
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:preport/services/basic.dart';
 import 'package:preport/services/models/beem/quality.dart';
 import 'package:preport/services/models/beem/yarn.dart';
 import 'package:preport/services/models/company_candidate.dart';
@@ -13,7 +12,6 @@ import '../models/beem/beem.dart';
 import '../models/beem/warpar.dart';
 import '../models/prod/company.dart';
 import '../models/prod/party.dart';
-import '../models/prod/taka.dart';
 
 class ListProvider with ChangeNotifier {
   List<Candidate> _candidateList = [];
@@ -53,9 +51,6 @@ class ListProvider with ChangeNotifier {
   Book get selectedBook => _selectedBook;
   Party get selectedParty => _selectedParty;
   Company get selectedCompany => _selectedCompany;
-
-  @override
-  void dispose() {}
 
   void getCandidateList(BuildContext context) async {
     firestore

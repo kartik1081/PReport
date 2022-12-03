@@ -1,9 +1,8 @@
+// ignore_for_file: file_names, must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:preport/services/constant.dart';
 import 'package:preport/services/models/beem/beem.dart';
-
-import '../../services/basic.dart';
-import '../../services/fire.dart';
 
 class RunningBeems extends StatelessWidget {
   RunningBeems({required this.runningBeems, super.key});

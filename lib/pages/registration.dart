@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:country_picker/country_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -675,13 +677,11 @@ class Registration extends StatelessWidget {
   Future<void> mapDetail(
       Map<String, dynamic> data, String key, dynamic value) async {
     data[key] = value;
-    print(data[key]);
   }
 
   Future<void> mapAddress(
       Map<String, dynamic> data, String key, dynamic value) async {
     data["address"][key] = value;
-    print(data["address"][key]);
   }
 
   void toast(BuildContext context, String error) {

@@ -1,7 +1,5 @@
-import 'dart:io';
+// ignore_for_file: file_names, empty_catches
 
-import 'package:country_dial_code/country_dial_code.dart';
-import 'package:country_picker/country_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,7 +21,6 @@ class RegistrationListener {
   }
 
   void pickImage() async {
-    print("Called");
     try {
       final pickedFile = await ImagePicker()
           // ignore: deprecated_member_use
@@ -32,8 +29,6 @@ class RegistrationListener {
         isPicked.value ? null : isPicked.value = !isPicked.value;
         profilePic.value = pickedFile.path;
       }
-    } catch (e) {
-      print(e.toString());
-    }
+    } catch (e) {}
   }
 }

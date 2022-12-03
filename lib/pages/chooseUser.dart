@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:preport/pages/home.dart';
 import 'package:preport/services/constant.dart';
@@ -31,7 +33,7 @@ class ChooseUser extends StatelessWidget {
   Widget candidateStream(BuildContext context) {
     return StreamProvider<List<Candidate>>(
       create: (context) => fire.getCandidates(),
-      initialData: [],
+      initialData: const [],
       builder: (context, child) {
         List<Candidate> candidates = Provider.of<List<Candidate>>(context);
         return ListView.builder(

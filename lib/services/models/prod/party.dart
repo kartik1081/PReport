@@ -1,5 +1,3 @@
-import 'package:preport/services/basic.dart';
-
 import '../../constant.dart';
 
 class Party {

@@ -1,10 +1,10 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:preport/pages/beem/beems.dart';
 import 'package:preport/pages/taka/dailyTaka.dart';
-import 'package:preport/services/basic.dart';
 import 'package:preport/services/constant.dart';
-import 'package:preport/services/fire.dart';
 
 import '../services/models/current.dart';
 

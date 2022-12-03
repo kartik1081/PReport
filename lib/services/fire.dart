@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// ignore_for_file: empty_catches
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:preport/pages/registration.dart';
 import 'package:preport/pages/splash.dart';
-import 'package:preport/services/basic.dart';
 import 'package:preport/services/models/current.dart';
 import 'package:preport/services/models/prod/taka.dart';
 
@@ -36,9 +36,7 @@ class Fire {
               },
             ),
           );
-    } on FirebaseAuthException catch (e) {
-      print(e.message);
-    }
+    } on FirebaseAuthException {}
   }
 
   Future<void> signUp(
@@ -62,10 +60,8 @@ class Fire {
                   ),
                 ),
           );
-    } on FirebaseAuthException catch (e) {
-      print(e.message);
-    }
-    return null;
+    } on FirebaseAuthException {}
+    return;
   }
 
   Future<void> signOut(BuildContext context) async {
@@ -301,6 +297,5 @@ class Fire {
                         .doc(company.id)
                         .collection("Sell History")
                         .add(data)))));
-    ;
   }
 }

@@ -1,5 +1,6 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/cupertino.dart';
-import 'package:preport/services/fire.dart';
 
 import '../constant.dart';
 import '../models/company_candidate.dart';
@@ -10,9 +11,6 @@ class CurrentProvider with ChangeNotifier {
   CurrentCompany _currentCompany = CurrentCompany.init();
   CurrentCandidate get currentCandidate => _currentCandidate;
   CurrentCompany get currentCompany => _currentCompany;
-
-  @override
-  void dispose() {}
 
   Future<void> currentCandidateDetail(Candidate candidate) async {
     _currentCandidate = CurrentCandidate.fromCandidate(candidate);

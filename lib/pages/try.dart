@@ -37,6 +37,7 @@ class Try extends StatelessWidget {
                             if (value.length < 8) {
                               return "minimum required length 8";
                             }
+                            return null;
                           },
                           decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.lock),
@@ -59,6 +60,7 @@ class Try extends StatelessWidget {
                             if (value.length < 8) {
                               return "minimum required length 8";
                             }
+                            return null;
                           },
                           decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.lock),

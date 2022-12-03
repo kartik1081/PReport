@@ -1,13 +1,12 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:preport/services/constant.dart';
 import 'package:preport/services/models/beem/beem.dart';
 import 'package:provider/provider.dart';
 
-import '../../services/basic.dart';
-import '../../services/fire.dart';
-
 class StokeBeems extends StatelessWidget {
-  StokeBeems({super.key});
+  const StokeBeems({super.key});
 
   final TextStyle _key = const TextStyle(color: Colors.black45, fontSize: 13.0);
   final TextStyle _value = const TextStyle(fontWeight: FontWeight.w500);
@@ -23,7 +22,7 @@ class StokeBeems extends StatelessWidget {
       ),
       body: StreamProvider<List<Beem>>(
         create: (context) => fire.getStokeBeem(),
-        initialData: [],
+        initialData: const [],
         builder: (context, _) {
           List<Beem> stokeBeems = Provider.of<List<Beem>>(context);
           return ListView.builder(

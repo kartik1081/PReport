@@ -1,12 +1,12 @@
+// ignore_for_file: file_names, must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:preport/pages/taka/addTaka.dart';
 import 'package:preport/services/models/current.dart';
 import 'package:preport/services/providers/listProvider.dart';
 import 'package:provider/provider.dart';
 
-import '../../services/basic.dart';
 import '../../services/constant.dart';
-import '../../services/fire.dart';
 import '../../services/models/prod/taka.dart';
 
 class DailyTaka extends StatelessWidget {
@@ -31,7 +31,7 @@ class DailyTaka extends StatelessWidget {
       ),
       body: StreamProvider<List<Taka>>(
         create: (context) => fire.getTaka(),
-        initialData: [],
+        initialData: const [],
         builder: (context, child) {
           List<Taka> takaList = Provider.of<List<Taka>>(context);
           return ListView.builder(

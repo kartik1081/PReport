@@ -1,12 +1,9 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:preport/pages/chooseUser.dart';
-import 'package:preport/pages/registration.dart';
 import 'package:preport/services/basic.dart';
 import 'package:preport/services/constant.dart';
-import 'package:preport/services/fire.dart';
 import 'package:preport/services/ValueListener/valueListener.dart';
 
 class Splash extends StatefulWidget {
@@ -147,6 +144,7 @@ class _SplashState extends State<Splash> {
                                               .hasMatch(value)) {
                                             return "Please enter valid Email";
                                           }
+                                          return null;
                                         },
                                         decoration: InputDecoration(
                                           prefixIcon: const Icon(Icons.mail),
@@ -192,6 +190,7 @@ class _SplashState extends State<Splash> {
                                           if (value.length < 8) {
                                             return "minimum required length 8";
                                           }
+                                          return null;
                                         },
                                         decoration: InputDecoration(
                                           prefixIcon:
@@ -259,7 +258,7 @@ class _SplashState extends State<Splash> {
                                                       .before.value;
                                                   _valueListener.afterSignIn();
                                                 }),
-                                            child: Container(
+                                            child: SizedBox(
                                               height: 30,
                                               width: 150.0,
                                               // color: Colors.red,
