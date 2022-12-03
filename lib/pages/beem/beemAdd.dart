@@ -1,14 +1,12 @@
+// ignore_for_file: file_names, must_be_immutable, unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:preport/pages/beem/beems.dart';
-import 'package:preport/services/ValueListener/listListener.dart';
-import 'package:preport/services/basic.dart';
-import 'package:preport/services/fire.dart';
 import 'package:preport/services/models/current.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../services/constant.dart';
-import '../../services/models/lists.dart';
 import '../../services/providers/listProvider.dart';
 
 class BeemAdd extends StatelessWidget {
@@ -50,7 +48,6 @@ class BeemAdd extends StatelessWidget {
   final FocusNode _tarFocus = FocusNode();
   final FocusNode _totalMeterFocus = FocusNode();
   final FocusNode _avgMeterFocus = FocusNode();
-  final FocusNode _totalTakaFocus = FocusNode();
   final FocusNode _yarnDenierFocus = FocusNode();
   final FocusNode _grossWtFocus = FocusNode();
   final FocusNode _pipeWtFocus = FocusNode();
@@ -66,15 +63,11 @@ class BeemAdd extends StatelessWidget {
   final FocusNode _amountFocus = FocusNode();
   final FocusNode _loomNoFocus = FocusNode();
   final FocusNode _yarnLotNoFocus = FocusNode();
-  bool _warparName = false;
-  bool _quality = false;
-  bool _yarnQuality = false;
   Map<String, dynamic> mapData = {};
   Map<String, dynamic> mapSubDetail = {};
 
   @override
   Widget build(BuildContext context) {
-    print(currentCandidate.candidatId);
     return Scaffold(
       backgroundColor: background,
       appBar: appBar(context),
@@ -963,7 +956,6 @@ class BeemAdd extends StatelessWidget {
                 ],
               ),
               onSelected: (warper) {
-                _warparName = true;
                 mapBeem(mapData, "warpar_name", warper.name).whenComplete(
                   () =>
                       mapBeem(mapData, "warpar_code", warper.code).whenComplete(
@@ -1034,7 +1026,6 @@ class BeemAdd extends StatelessWidget {
                 ],
               ),
               onSelected: (quality) {
-                _quality = true;
                 mapBeem(mapData, "quality_name", quality.name).whenComplete(
                   () => mapBeem(mapData, "quality_code", quality.code)
                       .whenComplete(
@@ -1106,7 +1097,6 @@ class BeemAdd extends StatelessWidget {
                 ],
               ),
               onSelected: (yarn) {
-                _yarnQuality = true;
                 mapBeem(mapData, "yarn_name", yarn.name).whenComplete(
                   () => mapBeem(mapData, "yarn_code", yarn.code).whenComplete(
                     () => listProvider.selectYarn(yarn),
