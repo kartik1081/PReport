@@ -4,15 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:preport/pages/addFounder.dart';
 import 'package:preport/pages/splash.dart';
-import 'package:preport/services/basic.dart';
-import 'package:preport/services/fire.dart';
+
+import '../services/constant.dart';
 
 class Registration extends StatelessWidget {
   Registration({required this.user, super.key});
   User user;
 
   final _formKey = GlobalKey<FormState>();
-  final Fire _fire = Fire();
   final TextEditingController _name = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _pNumber = TextEditingController();
@@ -30,7 +29,6 @@ class Registration extends StatelessWidget {
   final FocusNode _cityFocus = FocusNode();
   final FocusNode _postalCodeFocus = FocusNode();
   final FocusNode _stateFocus = FocusNode();
-  final BasicService _service = BasicService();
   Map<String, dynamic> data = {"address": {}};
 
   @override
@@ -111,8 +109,8 @@ class Registration extends StatelessWidget {
   Widget leadingAppBar(BuildContext context) {
     return IconButton(
         onPressed: () {
-          _fire.registrationAbort(context).whenComplete(
-                () => _service.navigat(
+          fire.registrationAbort(context).whenComplete(
+                () => service.navigat(
                   context,
                   const Splash(),
                 ),
@@ -231,7 +229,7 @@ class Registration extends StatelessWidget {
       enableSuggestions: true,
       autocorrect: true,
       readOnly: true,
-      onTap: () => _service.selectDate(context).then((value) {
+      onTap: () => service.selectDate(context).then((value) {
         _date.text = value["String"];
         mapDetail(data, "founding_date", value["DateTime"]);
       }),
@@ -474,7 +472,7 @@ class Registration extends StatelessWidget {
       onTap: () => showCountryPicker(
         context: context,
         onSelect: (value) {
-          _service.getCountryDetail(context, value.countryCode).then(
+          service.getCountryDetail(context, value.countryCode).then(
             (value) {
               mapAddress(data, "country", value.name.toUpperCase().trim())
                   .whenComplete(
@@ -565,13 +563,13 @@ class Registration extends StatelessWidget {
                                                                 _country.text)
                                                             .then((value) =>
                                                                 value
-                                                                    ? _fire
+                                                                    ? fire
                                                                         .storeCompanyDetail(
                                                                             data)
                                                                         .then(
                                                                         (value) {
                                                                           clearTextField();
-                                                                          return _service
+                                                                          return service
                                                                               .navigat(
                                                                             context,
                                                                             AddFounder(fromRegister: true),
@@ -602,7 +600,7 @@ class Registration extends StatelessWidget {
       toast(context, "Please enter Email");
       return false;
     }
-    // if (_service.emailRegex.hasMatch(email)) {
+    // if (service.emailRegex.hasMatch(email)) {
     //   toast(context, "Please enter valid Email");
     //   return false;
     // }
@@ -613,7 +611,7 @@ class Registration extends StatelessWidget {
     if (pNumber.isEmpty) {
       toast(context, "Please enter Phone Number");
       return false;
-    } else if (!_service.phoneRegex.hasMatch(pNumber)) {
+    } else if (!service.phoneRegex.hasMatch(pNumber)) {
       toast(context, "Please enter valid Phone Number");
       return false;
     }

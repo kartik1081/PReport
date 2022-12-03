@@ -1,8 +1,5 @@
-import 'package:preport/services/basic.dart';
-
+import '../constant.dart';
 import 'company_candidate.dart';
-
-final BasicService _service = BasicService();
 
 class CurrentCompany {
   String companyId,
@@ -53,7 +50,7 @@ class CurrentCompany {
       companyId: json["company_id"],
       dialCode: json["dial_code"],
       email: json["email"],
-      foundingDate: _service.getDateMonth(json["founding_date"]),
+      foundingDate: service.getDateMonth(json["founding_date"]),
       name: json["name"],
       phoneNumber: json["phone_number"],
       city: json["address"]["city"],

@@ -7,6 +7,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
+import 'models/beem/beem.dart';
+
 class BasicService {
   final RegExp emailRegex = RegExp(
       r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
@@ -77,5 +79,47 @@ class BasicService {
 
   void toast(BuildContext context, String error) {
     Fluttertoast.showToast(msg: error);
+  }
+
+  Future<Map<String, dynamic>> beemToMap(Beem beem) async {
+    return {
+      "added_by": beem.addedBy,
+      "amount": beem.amount,
+      "arriving_time": beem.arrivingDate,
+      "bal_meter": beem.balMeter,
+      "beem_no": beem.beemNo,
+      "beem_size": beem.beemSize,
+      "end_date": beem.endDate,
+      "gross_wt": beem.grossWt,
+      "id": beem.id,
+      "last_year_rec_meter": beem.lastYearRecMeter,
+      "loading_date": DateTime.now(),
+      "loom_no": beem.loomNo,
+      "min_strg": beem.minStrg,
+      "name": beem.name,
+      "pick": beem.pick,
+      "pipe_no": beem.pipeNo,
+      "pipe_wt": beem.pipeWt,
+      "pno": beem.pno,
+      "quality_code": beem.qualityCode,
+      "quality_name": beem.qualityName,
+      "rec_taka2": beem.reTaka2,
+      "rec_meter": beem.recMeter,
+      "rec_taka": beem.recTaka,
+      "remark": beem.remark,
+      "rpm": beem.rpm,
+      "tar": beem.tar,
+      "total_meter2": beem.totalMeter2,
+      "total_meter_consum": beem.totalMeterConsum,
+      "total_meter": beem.totalMetr,
+      "total_taka": beem.totalTaka,
+      "warpar_code": beem.warparCode,
+      "warpar_name": beem.warparName,
+      "warpar_rate": beem.warparRate,
+      "yarn_code": beem.yarnCode,
+      "yarn_lot_no": beem.yarnLotNo,
+      "yarn_name": beem.yarnName,
+      "yarn_net_wt": beem.yarnNetWt,
+    };
   }
 }

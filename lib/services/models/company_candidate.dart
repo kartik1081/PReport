@@ -1,7 +1,4 @@
-import 'package:preport/services/basic.dart';
-import 'package:preport/services/models/current.dart';
-
-final BasicService _service = BasicService();
+import '../constant.dart';
 
 class Compnay {
   String companyId,
@@ -93,7 +90,7 @@ class Candidate {
 
   factory Candidate.fromJson(Map<String, dynamic> json) {
     return Candidate(
-      birthDate: _service.getDateMonth(json["birth_date"]),
+      birthDate: service.getDateMonth(json["birth_date"]),
       candidatId: json["candidate_id"],
       dialCode: json["dial_code"],
       email: json["email"],
@@ -103,8 +100,8 @@ class Candidate {
       phoneNumber: json["phone_number"],
       position: json["position"],
       profilePic: json["profile_pic"],
-      registeredDate: _service.getDateMonthYear(
-        _service.timeStampToDateTime(
+      registeredDate: service.getDateMonthYear(
+        service.timeStampToDateTime(
           json["registered_date"],
         ),
       ),

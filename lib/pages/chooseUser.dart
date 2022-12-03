@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:preport/pages/addFounder.dart';
 import 'package:preport/pages/home.dart';
-import 'package:preport/services/ValueListener/passwordView.dart';
-import 'package:preport/services/basic.dart';
-import 'package:preport/services/fire.dart';
-import 'package:preport/services/models/current.dart';
-import 'package:preport/services/providers/currentCandidateProvider.dart';
+import 'package:preport/services/constant.dart';
 import 'package:preport/services/providers/currentProvider.dart';
 import 'package:provider/provider.dart';
-
 import '../services/models/company_candidate.dart';
 
 class ChooseUser extends StatelessWidget {
@@ -17,17 +11,14 @@ class ChooseUser extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _password = TextEditingController();
 
-  final BasicService _service = BasicService();
-  final Fire _fire = Fire();
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: background,
         appBar: AppBar(
-          backgroundColor: Colors.redAccent,
+          backgroundColor: appbar,
           automaticallyImplyLeading: false,
           title: const Text("Choose User"),
           actions: const [],
@@ -39,7 +30,7 @@ class ChooseUser extends StatelessWidget {
 
   Widget candidateStream(BuildContext context) {
     return StreamProvider<List<Candidate>>(
-      create: (context) => _fire.getCandidates(),
+      create: (context) => fire.getCandidates(),
       initialData: [],
       builder: (context, child) {
         List<Candidate> candidates = Provider.of<List<Candidate>>(context);
@@ -58,7 +49,7 @@ class ChooseUser extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 5.0),
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: listtile,
         borderRadius: BorderRadius.all(
           Radius.circular(10.0),
         ),
@@ -137,7 +128,7 @@ class ChooseUser extends StatelessWidget {
                                 (value) {
                                   if (value) {
                                     dismissDialog(context);
-                                    _service.navigat(
+                                    service.navigat(
                                       context,
                                       Home(
                                         currentCompany:
@@ -169,11 +160,11 @@ class ChooseUser extends StatelessWidget {
   Future<bool> passwordValidate(
       BuildContext context, String password, String candidatePassword) async {
     if (password.isEmpty) {
-      _service.toast(context, "Please enter password");
+      service.toast(context, "Please enter password");
       return false;
     }
     if (password != candidatePassword) {
-      _service.toast(context, "Please enter valid password");
+      service.toast(context, "Please enter valid password");
       return false;
     }
     return true;

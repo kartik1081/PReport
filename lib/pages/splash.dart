@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:preport/pages/chooseUser.dart';
 import 'package:preport/pages/registration.dart';
 import 'package:preport/services/basic.dart';
+import 'package:preport/services/constant.dart';
 import 'package:preport/services/fire.dart';
 import 'package:preport/services/ValueListener/valueListener.dart';
 
@@ -17,7 +18,6 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> {
   final _formKey = GlobalKey<FormState>();
-  final Fire _fire = Fire();
   late TextEditingController _email;
   late TextEditingController _password;
   final BasicService _service = BasicService();
@@ -42,20 +42,20 @@ class _SplashState extends State<Splash> {
         Text(
           "P",
           style: TextStyle(
+            color: button,
             fontSize: 40.0,
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
           "Report",
-          style: TextStyle(
-              color: Colors.red, fontSize: 40.0, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
         )
       ],
     );
     Timer(
       const Duration(seconds: 3),
-      () => _fire.checkCurrentUser().listen((value) => !value
+      () => fire.checkCurrentUser().listen((value) => !value
           ? setState(() {
               _paddingValue = 0.0;
               logo(context);
@@ -68,6 +68,7 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: background,
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Center(
@@ -228,10 +229,10 @@ class _SplashState extends State<Splash> {
                                           if (_formKey.currentState!
                                               .validate()) {
                                             if (!after) {
-                                              _fire.signIn(context, _email.text,
+                                              fire.signIn(context, _email.text,
                                                   _password.text);
                                             } else {
-                                              _fire.signUp(context, _email.text,
+                                              fire.signUp(context, _email.text,
                                                   _password.text);
                                             }
 

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, must_be_immutable
+
 import 'dart:async';
 
 import 'package:country_picker/country_picker.dart';
@@ -6,10 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:preport/pages/chooseUser.dart';
 import 'package:preport/pages/splash.dart';
 import 'package:preport/services/ValueListener/registrationListener.dart';
-import 'package:preport/services/basic.dart';
-import 'package:preport/services/fire.dart';
-import 'package:preport/services/providers/countryProvider.dart';
-import 'package:provider/provider.dart';
+import 'package:preport/services/constant.dart';
 
 class AddFounder extends StatelessWidget {
   AddFounder({required this.fromRegister, super.key});
@@ -17,8 +16,6 @@ class AddFounder extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
   final _passwordKey = GlobalKey<FormState>();
-  final Fire _fire = Fire();
-  final BasicService _service = BasicService();
   final TextEditingController _name = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _pNumber = TextEditingController();
@@ -47,61 +44,58 @@ class AddFounder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     data["admin"] = fromRegister;
-    return ChangeNotifierProvider<CountryProvider>(
-      create: (context) => CountryProvider(),
-      builder: (context, child) => Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.lightBlueAccent,
-        appBar: AppBar(
-          backgroundColor: Colors.redAccent,
-          title: const Text("Register Founder"),
-        ),
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  positionRadio(context),
-                  sizedBox(),
-                  const Divider(height: 2.0, thickness: 2.0),
-                  sizedBox(),
-                  nameText(context),
-                  sizedBox(),
-                  emailText(context),
-                  sizedBox(),
-                  phoneNumberText(context),
-                  sizedBox(),
-                  genderRadio(context),
-                  sizedBox(),
-                  birthDateText(context),
-                  const SizedBox(
-                    height: 5.0,
-                  ),
-                  sizedBox(),
-                  const Divider(
-                    color: Colors.black54,
-                    thickness: 0.5,
-                  ),
-                  addressText(context),
-                  streetText(context),
-                  sizedBox(),
-                  landmarkText(context),
-                  sizedBox(),
-                  cityText(context),
-                  sizedBox(),
-                  postalText(context),
-                  sizedBox(),
-                  stateText(context),
-                  sizedBox(),
-                  countryText(context),
-                  sizedBox(),
-                  registerCandidate(context),
-                ],
-              ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor:background,
+      appBar: AppBar(
+        backgroundColor:appbar,
+        title: const Text("Register Founder"),
+      ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                positionRadio(context),
+                sizedBox(),
+                const Divider(height: 2.0, thickness: 2.0),
+                sizedBox(),
+                nameText(context),
+                sizedBox(),
+                emailText(context),
+                sizedBox(),
+                phoneNumberText(context),
+                sizedBox(),
+                genderRadio(context),
+                sizedBox(),
+                birthDateText(context),
+                const SizedBox(
+                  height: 5.0,
+                ),
+                sizedBox(),
+                const Divider(
+                  color: Colors.black54,
+                  thickness: 0.5,
+                ),
+                addressText(context),
+                streetText(context),
+                sizedBox(),
+                landmarkText(context),
+                sizedBox(),
+                cityText(context),
+                sizedBox(),
+                postalText(context),
+                sizedBox(),
+                stateText(context),
+                sizedBox(),
+                countryText(context),
+                sizedBox(),
+                registerCandidate(context),
+              ],
             ),
           ),
         ),
@@ -345,7 +339,7 @@ class AddFounder extends StatelessWidget {
       enableSuggestions: true,
       autocorrect: true,
       readOnly: true,
-      onTap: () => _service.selectDate(context).then((value) {
+      onTap: () => service.selectDate(context).then((value) {
         _date.text = value["String"];
         mapDetail(data, "birth_date", value["DateTime"]);
       }),
@@ -588,7 +582,7 @@ class AddFounder extends StatelessWidget {
       onTap: () => showCountryPicker(
         context: context,
         onSelect: (value) {
-          _service.getCountryDetail(context, value.countryCode).then(
+          service.getCountryDetail(context, value.countryCode).then(
             (value) {
               mapAddress(data, "country", value.name.toUpperCase().trim())
                   .whenComplete(
@@ -688,7 +682,7 @@ class AddFounder extends StatelessWidget {
       toast(context, "Please enter Email");
       return false;
     }
-    if (!_service.emailRegex.hasMatch(email)) {
+    if (!service.emailRegex.hasMatch(email)) {
       toast(context, "Please enter valid Email");
       return false;
     }
@@ -700,7 +694,7 @@ class AddFounder extends StatelessWidget {
     if (pNumber.isEmpty) {
       toast(context, "Please enter Phone Number");
       return false;
-    } else if (!_service.phoneRegex.hasMatch(pNumber)) {
+    } else if (!service.phoneRegex.hasMatch(pNumber)) {
       toast(context, "Please enter valid Phone Number");
       return false;
     }
@@ -794,13 +788,11 @@ class AddFounder extends StatelessWidget {
   Future<void> mapDetail(
       Map<String, dynamic> data, String key, dynamic value) async {
     data[key] = value;
-    print(data);
   }
 
   Future<void> mapAddress(
       Map<String, dynamic> data, String key, dynamic value) async {
     data["address"][key] = value;
-    print(data);
   }
 
   Future<void> setUserPassword(BuildContext context) async {
@@ -904,7 +896,7 @@ class AddFounder extends StatelessWidget {
                               mapDetail(data, "password", _confirmPassword.text)
                                   .then(
                                 (value) =>
-                                    _fire.storeCandidateDetail(data).then(
+                                    fire.storeCandidateDetail(data).then(
                                   (value) {
                                     clearTextField();
                                     Navigator.pop(context);
@@ -915,7 +907,7 @@ class AddFounder extends StatelessWidget {
                                 () {
                                   clearePassword();
                                   !fromRegister
-                                      ? _service.navigat(
+                                      ? service.navigat(
                                           context,
                                           ChooseUser(),
                                         )
@@ -944,13 +936,13 @@ class AddFounder extends StatelessWidget {
           TextButton(
               onPressed: () {
                 Navigator.pop(context);
-                _service
+                service
                     .navigat(
                       context,
                       const Splash(),
                     )
                     .whenComplete(
-                      () => _fire.signOut(context),
+                      () => fire.signOut(context),
                     );
               },
               child: const Text("No")),
