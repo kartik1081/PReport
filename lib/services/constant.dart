@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:preport/services/ValueListener/takaListener.dart';
 import 'package:preport/services/basic.dart';
 import 'package:preport/services/fire.dart';
+import 'package:preport/services/models/company_candidate.dart';
+import 'package:preport/services/models/current.dart';
 import 'package:preport/services/models/lists.dart';
+import 'package:preport/services/providers/currentProvider.dart';
+import 'package:provider/provider.dart';
 
 import 'ValueListener/listListener.dart';
 

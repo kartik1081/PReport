@@ -57,7 +57,11 @@ class _SplashState extends State<Splash> {
               _paddingValue = 0.0;
               logo(context);
             })
-          : _service.navigat(context, ChooseUser())),
+          : fire.getCandidateList().then((candidateList) => service.navigat(
+              context,
+              ChooseUser(
+                candidateList: candidateList,
+              )))),
     );
   }
 

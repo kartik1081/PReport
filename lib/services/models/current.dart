@@ -2,7 +2,7 @@ import '../constant.dart';
 import 'company_candidate.dart';
 
 class CurrentCompany {
-  String companyId,
+  String? companyId,
       dialCode,
       email,
       foundingDate,
@@ -10,24 +10,24 @@ class CurrentCompany {
       phoneNumber,
       city,
       country,
+      landmark,
       postalCode,
       state,
       street;
-  String? landmark;
 
   CurrentCompany({
-    required this.companyId,
-    required this.dialCode,
-    required this.email,
-    required this.foundingDate,
-    required this.name,
-    required this.phoneNumber,
-    required this.city,
-    required this.country,
+    this.companyId,
+    this.dialCode,
+    this.email,
+    this.foundingDate,
+    this.name,
+    this.phoneNumber,
+    this.city,
+    this.country,
     this.landmark,
-    required this.postalCode,
-    required this.state,
-    required this.street,
+    this.postalCode,
+    this.state,
+    this.street,
   });
 
   factory CurrentCompany.init() {
@@ -64,7 +64,7 @@ class CurrentCompany {
 }
 
 class CurrentCandidate {
-  String birthDate,
+  String? birthDate,
       candidatId,
       dialCode,
       email,
@@ -76,28 +76,28 @@ class CurrentCandidate {
       profilePic,
       city,
       country,
+      landmark,
       postalCode,
       state,
       street;
-  String? landmark;
 
   CurrentCandidate({
-    required this.birthDate,
-    required this.candidatId,
-    required this.dialCode,
-    required this.email,
-    required this.gender,
-    required this.name,
-    required this.password,
-    required this.phoneNumber,
-    required this.position,
-    required this.profilePic,
-    required this.city,
-    required this.country,
+    this.birthDate,
+    this.candidatId,
+    this.dialCode,
+    this.email,
+    this.gender,
+    this.name,
+    this.password,
+    this.phoneNumber,
+    this.position,
+    this.profilePic,
+    this.city,
+    this.country,
     this.landmark,
-    required this.postalCode,
-    required this.state,
-    required this.street,
+    this.postalCode,
+    this.state,
+    this.street,
   });
 
   factory CurrentCandidate.init() {

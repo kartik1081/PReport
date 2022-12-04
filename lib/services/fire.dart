@@ -96,21 +96,15 @@ class Fire {
         );
   }
 
-  Stream<List<Candidate>> getCandidates() {
+  Future<List<Candidate>> getCandidateList() async {
     return firestore
         .collection("Company")
-        .doc(currentUserId())
+        .doc(auth.currentUser!.uid)
         .collection("Candidates")
-        .snapshots()
-        .map(
-          (snapshot) => snapshot.docs
-              .map(
-                (document) => Candidate.fromJson(
-                  document.data(),
-                ),
-              )
-              .toList(growable: true),
-        );
+        .get()
+        .then((snapshot) => snapshot.docs
+            .map((document) => Candidate.fromJson(document.data()))
+            .toList(growable: true));
   }
 
   Future<CurrentCompany> getCompanyDetail() async {

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:preport/services/models/beem/quality.dart';
 import 'package:preport/services/models/beem/yarn.dart';
 import 'package:preport/services/models/company_candidate.dart';
+import 'package:preport/services/models/current.dart';
 import 'package:preport/services/models/prod/book.dart';
 
 import '../constant.dart';
@@ -54,23 +55,6 @@ class ListProvider with ChangeNotifier {
 
   @override
   void dispose() {}
-
-  void getCandidateList(BuildContext context) async {
-    firestore
-        .collection("Company")
-        .doc(auth.currentUser!.uid)
-        .collection("Candidates")
-        .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((document) => Candidate.fromJson(document.data()))
-            .toList(growable: true))
-        .listen(
-      (event) {
-        _candidateList = event;
-        notifyListeners();
-      },
-    );
-  }
 
   Future<void> getWarparList() async {
     firestore

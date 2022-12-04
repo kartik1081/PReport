@@ -46,9 +46,9 @@ class AddFounder extends StatelessWidget {
     data["admin"] = fromRegister;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor:background,
+      backgroundColor: background,
       appBar: AppBar(
-        backgroundColor:appbar,
+        backgroundColor: appbar,
         title: const Text("Register Founder"),
       ),
       body: SingleChildScrollView(
@@ -886,39 +886,42 @@ class AddFounder extends StatelessWidget {
             child: const Text("cancle"),
           ),
           TextButton(
-            onPressed: () =>
-                passwordValidate(context, _password.text, false, null).then(
-                    (value) => value
-                        ? passwordValidate(context, _password.text, true,
-                                _confirmPassword.text)
-                            .then((value) {
-                            if (value) {
-                              mapDetail(data, "password", _confirmPassword.text)
-                                  .then(
-                                (value) =>
-                                    fire.storeCandidateDetail(data).then(
-                                  (value) {
-                                    clearTextField();
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              )
-                                  .whenComplete(
-                                () {
-                                  clearePassword();
-                                  !fromRegister
-                                      ? service.navigat(
-                                          context,
-                                          ChooseUser(),
-                                        )
-                                      : addCandidate(context);
-                                },
-                              );
-                            } else {
-                              _confirmPassword.clear();
-                            }
-                          })
-                        : _passwordFocus.requestFocus()),
+            onPressed: () => passwordValidate(
+                    context, _password.text, false, null)
+                .then((value) => value
+                    ? passwordValidate(context, _password.text, true,
+                            _confirmPassword.text)
+                        .then((value) {
+                        if (value) {
+                          mapDetail(data, "password", _confirmPassword.text)
+                              .then(
+                            (value) => fire.storeCandidateDetail(data).then(
+                              (value) {
+                                clearTextField();
+                                Navigator.pop(context);
+                              },
+                            ),
+                          )
+                              .whenComplete(
+                            () {
+                              clearePassword();
+                              !fromRegister
+                                  ? fire
+                                      .getCandidateList()
+                                      .then((candidateList) => service.navigat(
+                                            context,
+                                            ChooseUser(
+                                              candidateList: candidateList,
+                                            ),
+                                          ))
+                                  : addCandidate(context);
+                            },
+                          );
+                        } else {
+                          _confirmPassword.clear();
+                        }
+                      })
+                    : _passwordFocus.requestFocus()),
             child: const Text("Ok"),
           ),
         ],

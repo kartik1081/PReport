@@ -8,7 +8,8 @@ import 'package:provider/provider.dart';
 import '../services/models/company_candidate.dart';
 
 class ChooseUser extends StatelessWidget {
-  ChooseUser({super.key});
+  ChooseUser({required this.candidateList, super.key});
+  List<Candidate> candidateList;
 
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _password = TextEditingController();
@@ -31,19 +32,12 @@ class ChooseUser extends StatelessWidget {
   }
 
   Widget candidateStream(BuildContext context) {
-    return StreamProvider<List<Candidate>>(
-      create: (context) => fire.getCandidates(),
-      initialData: const [],
-      builder: (context, child) {
-        List<Candidate> candidates = Provider.of<List<Candidate>>(context);
-        return ListView.builder(
-          itemCount: candidates.length,
-          shrinkWrap: true,
-          padding: const EdgeInsets.all(10.0),
-          scrollDirection: Axis.vertical,
-          itemBuilder: (context, index) => userTile(context, candidates[index]),
-        );
-      },
+    return ListView.builder(
+      itemCount: candidateList.length,
+      shrinkWrap: true,
+      padding: const EdgeInsets.all(10.0),
+      scrollDirection: Axis.vertical,
+      itemBuilder: (context, index) => userTile(context, candidateList[index]),
     );
   }
 
@@ -125,7 +119,7 @@ class ChooseUser extends StatelessWidget {
                               (value) => passwordValidate(
                                 context,
                                 _password.text,
-                                currentProvider.currentCandidate.password,
+                                currentProvider.currentCandidate.password!,
                               ).then(
                                 (value) {
                                   if (value) {
@@ -137,6 +131,7 @@ class ChooseUser extends StatelessWidget {
                                             currentProvider.currentCompany,
                                         currentCandidate:
                                             currentProvider.currentCandidate,
+                                        candidateList: candidateList,
                                       ),
                                     );
                                   }
