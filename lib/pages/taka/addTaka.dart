@@ -39,6 +39,7 @@ class AddTaka extends StatelessWidget {
     return AppBar(
       backgroundColor: appbar,
       title: const Text("Add Taka"),
+      leading: backButton(context),
       actions: [addDetail(context)],
     );
   }

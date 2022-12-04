@@ -838,16 +838,6 @@ class BeemAdd extends StatelessWidget {
     );
   }
 
-  Widget backButton(BuildContext context) {
-    return IconButton(
-      onPressed: () => service.navigat(
-        context,
-        Beems(currentCandidate: currentCandidate),
-      ),
-      icon: const Icon(Icons.arrow_back),
-    );
-  }
-
   Widget addBeemDetail(BuildContext context) {
     return PopupMenuButton(
       itemBuilder: (context) => lists.beemDropDownList

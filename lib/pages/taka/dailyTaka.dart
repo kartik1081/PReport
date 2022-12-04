@@ -25,6 +25,7 @@ class DailyTaka extends StatelessWidget {
       backgroundColor: background,
       appBar: AppBar(
         backgroundColor: appbar,
+        leading: backButton(context),
         actions: [
           addTaka(context),
         ],

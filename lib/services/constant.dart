@@ -20,10 +20,14 @@ final firestore = FirebaseFirestore.instance;
 
 const white = Colors.white;
 const black = Colors.black;
-const appbar = Color(0xff4272f1);
-const listtile = Color.fromARGB(255, 194, 225, 250);
-const background = Color.fromARGB(255, 255, 255, 255);
+// const appbar = Color(0xff4272f1);
+// const listtile = Color.fromARGB(255, 194, 225, 250);
+// const background = Color.fromARGB(255, 255, 255, 255);
+// const button = Color.fromARGB(255, 241, 66, 66);
 const button = Color.fromARGB(255, 241, 66, 66);
+const appbar = Color(0xff2e3a59);
+const background = Color(0xffffffff);
+const listtile = Color(0xffedf1f7);
 
 height(double height) => SizedBox(
       height: height,
@@ -33,6 +37,6 @@ width(double width) => SizedBox(
       width: width,
     );
 
-backButton(BuildContext context, Widget to) => IconButton(
+backButton(BuildContext context) => IconButton(
     onPressed: () => Navigator.pop(context),
     icon: const Icon(Icons.arrow_back));

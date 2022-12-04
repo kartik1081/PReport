@@ -28,6 +28,7 @@ class Beems extends StatelessWidget {
     return AppBar(
       backgroundColor: appbar,
       title: const Text("Beems"),
+      leading: backButton(context),
       actions: [addBeem(context)],
     );
   }
