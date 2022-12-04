@@ -52,6 +52,9 @@ class ListProvider with ChangeNotifier {
   Party get selectedParty => _selectedParty;
   Company get selectedCompany => _selectedCompany;
 
+  @override
+  void dispose() {}
+
   void getCandidateList(BuildContext context) async {
     firestore
         .collection("Company")
