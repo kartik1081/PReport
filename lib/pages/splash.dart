@@ -46,7 +46,8 @@ class _SplashState extends State<Splash> {
         ),
         Text(
           "Report",
-          style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: appbar, fontSize: 40.0, fontWeight: FontWeight.bold),
         )
       ],
     );
